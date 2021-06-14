@@ -18,8 +18,7 @@ let globalSyncOptions = {}
 const AlphaWallet = {
   init (rpcUrl, options, syncOptions) { 
     const engine = new ProviderEngine()
-    const web3 = new Web3(engine)
-    context.web3 = web3
+    context.web3 = new Web3(engine)
     globalSyncOptions = syncOptions
 
     engine.addProvider(new CacheSubprovider())
@@ -73,6 +72,18 @@ const AlphaWallet = {
       callback(error, value)
     }
     delete callbacks[id]
+  },
+  changeChain (chainId) {
+    globalSyncOptions.networkVersion = chainId
+    window.ethereum.emit('chainChanged', '0x' + parseInt(chainId).toString(16))
+  },
+  changeAccount (address) {
+    globalSyncOptions.address = address
+    web3.eth.defaultAccount = address
+    web3.eth.getCoinbase = function(cb) {
+      return cb(null, address)
+    }
+    window.ethereum.emit('accountsChanged', [address])
   }
 }
 

@@ -26,12 +26,12 @@ const gulp            = require('gulp'),
         };
 
 gulp.task('clean:stage', function () {
-  let stagingDir = `${config.staging.baseDir}/${config.fileTypes.all}`;
+  let stagingDir = `${config.staging.baseDir}`;
   return del(stagingDir);
 });
 
 gulp.task('clean:dist', function () {
-  let distributionDir = `${config.distribution.baseDir}/${config.fileTypes.all}`;
+  let distributionDir = `${config.distribution.baseDir}`;
   return del(distributionDir);
 });
 

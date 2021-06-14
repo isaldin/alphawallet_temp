@@ -5,6 +5,7 @@
 node_modules/
 jspm_packages/
 staging/
+dist/
 *.swp
 *.swo
 
